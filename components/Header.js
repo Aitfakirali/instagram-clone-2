@@ -24,7 +24,7 @@ function Header() {
           <img
             src="/normal-header-logo.png"
             layout="fill"
-            className="cursor-pointer object-contain"
+            className="cursor-pointer ineobject-contain"
             onClick={() => router.push("/")}
           />
         </div>
@@ -32,7 +32,7 @@ function Header() {
           <img
             src="/mini-header-logo.png"
             layout="fill"
-            className="cursor-pointer object-contain"
+            className="cursor-pointer ineobject-contain"
             onClick={() => router.push("/")}
           />
         </div>
@@ -67,7 +67,7 @@ function Header() {
               <UserGroupIcon className="navbtn" />
               <HeartIcon className="navbtn" />
 
-              <MenuIcon className="h-8 w-8 md:hidden cursor-pointer" />
+              <MenuIcon className="h-10 w-10 md:hidden cursor-pointer" />
               <img
                 src={session?.user?.image}
                 alt="profile pic"

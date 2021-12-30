@@ -22,12 +22,20 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Moment from "react-moment";
 import { db } from "../firebase";
+import { useInView } from "react-intersection-observer";
+
+const option = {
+  threshold: 0.5,
+  triggerOnce: true,
+};
 function Post({ id, username, userImg, image, caption }) {
   const { data: session } = useSession();
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
+  const { ref, inView, entry } = useInView(option);
+
   useEffect(
     () =>
       onSnapshot(
@@ -81,7 +89,7 @@ function Post({ id, username, userImg, image, caption }) {
     });
   };
   return (
-    <div className="bg-white my-7 border rounded-sm">
+    <div className={`bg-white my-7 border rounded-sm`}>
       {/* header */}
       <div className="flex items-center p-5">
         <img
@@ -95,7 +103,15 @@ function Post({ id, username, userImg, image, caption }) {
         <DotsHorizontalIcon className="h-5 cursor-pointer" />
       </div>
       {/* image */}
-      <img src={image} className="object-cover w-full" alt="" />
+      <img
+        ref={ref}
+        src={image}
+        className={`transition-opacity duration-200 ${
+          inView ? "opacity-100" : "opacity-0"
+        } object-cover w-full`}
+        alt=""
+      />
+
       {/* buttons */}
       {session && (
         <div className="flex justify-between items-center px-4 pt-4">
