@@ -47,7 +47,7 @@ function Post({ id, username, userImg, image, caption }) {
           setComments(snapshot.docs);
         }
       ),
-    [db, id]
+    [id]
   );
 
   useEffect(
@@ -55,7 +55,7 @@ function Post({ id, username, userImg, image, caption }) {
       onSnapshot(collection(db, "posts", id, "likes"), (snapshot) =>
         setLikes(snapshot.docs)
       ),
-    [db, id]
+    [id]
   );
 
   useEffect(
